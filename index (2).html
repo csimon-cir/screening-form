@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Abstract screening – gender and agronomy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#EEF2EF; --paper:#FFFFFF; --ink:#1F2D27; --muted:#4F5E56; --line:#C5D0CA;
+  --accent:#2E6A4F; --accent-soft:#DDEBE3; --excl:#5B6670; --excl-soft:#E6E9EC; --danger:#A3261E;
+  --mark-g:#F6DD8A; --mark-a:#BFE3D0;
+  --sans:"Public Sans",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+  --serif:"Source Serif 4",Georgia,"Times New Roman",serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{font-family:var(--sans);background:var(--bg);color:var(--ink);font-size:16px;line-height:1.5}
+a{color:var(--accent)}
+.skip{position:absolute;left:-999px;top:0;background:var(--accent);color:#fff;padding:8px 12px;z-index:10}
+.skip:focus{left:8px}
+:focus-visible{outline:3px solid #1B4FBF;outline-offset:2px}
+button,select,input,textarea{font:inherit;color:inherit}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+
+header{background:var(--paper);border-bottom:1px solid var(--line);padding:12px 20px;display:flex;flex-wrap:wrap;gap:12px 24px;align-items:center;position:sticky;top:0;z-index:5}
+@media (max-width:700px){header{position:static}}
+header h1{font-size:1.05rem;margin:0;font-weight:700}
+.progress{flex:1 1 220px;min-width:180px}
+.progress-label{font-size:.85rem;color:var(--muted)}
+.bar{height:8px;background:var(--excl-soft);border-radius:4px;overflow:hidden;margin-top:4px}
+.bar span{display:block;height:100%;background:var(--accent);width:0}
+.coder{font-size:.9rem;color:var(--muted)}
+.nav{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.nav select{min-height:40px;padding:0 8px;border:1px solid var(--line);border-radius:6px;background:#fff}
+.btn{border:1px solid var(--line);background:var(--paper);padding:8px 14px;border-radius:6px;cursor:pointer;min-height:40px}
+.btn:hover{border-color:var(--accent)}
+.btn-primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+
+main{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(300px,1fr);gap:20px;max-width:1280px;margin:20px auto;padding:0 20px}
+@media (max-width:900px){main{grid-template-columns:1fr}}
+.article{background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:24px 28px}
+.article .meta{color:var(--muted);font-size:.9rem;margin:0 0 6px}
+.article h2{font-family:var(--serif);font-size:1.45rem;line-height:1.3;margin:0 0 6px;font-weight:600}
+.article .authors{font-size:.9rem;color:var(--muted);margin:0 0 18px}
+.abstract{font-family:var(--serif);font-size:1.08rem;line-height:1.7;max-width:70ch}
+mark{color:inherit;padding:0 2px;border-radius:2px}
+mark.g{background:var(--mark-g)}
+mark.a{background:var(--mark-a)}
+.no-g mark.g,.no-a mark.a{background:none;padding:0}
+.empty{color:var(--danger);font-style:italic}
+.counts{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 16px}
+.count{display:inline-flex;gap:8px;align-items:center;border-radius:6px;padding:6px 10px;font-size:.92rem}
+.count.g{background:var(--mark-g)}
+.count.a{background:var(--mark-a)}
+.count strong{font-size:1.1rem}
+.tools{display:flex;gap:16px;flex-wrap:wrap;align-items:center;margin-top:20px;padding-top:14px;border-top:1px solid var(--line);font-size:.9rem;color:var(--muted)}
+
+form{background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:20px;align-self:start;position:sticky;top:84px;max-height:calc(100vh - 100px);overflow:auto}
+@media (max-width:900px){form{position:static;max-height:none}}
+fieldset{border:none;margin:0 0 18px;padding:0}
+legend{font-weight:700;margin-bottom:8px}
+.hint{font-size:.85rem;color:var(--muted);margin:-4px 0 8px}
+.choices{display:grid;gap:6px}
+.choice{display:flex;gap:10px;align-items:flex-start;padding:8px 10px;border:1px solid var(--line);border-radius:6px;cursor:pointer}
+.choice:hover{border-color:var(--accent)}
+.choice input{margin-top:4px;accent-color:var(--accent);width:18px;height:18px;flex:none}
+.choice .t{font-weight:600}
+.choice .d{display:block;font-size:.83rem;color:var(--muted)}
+.choice:has(input:checked){border-color:var(--accent);background:var(--accent-soft)}
+.dec{grid-template-columns:1fr 1fr 1fr}
+.dec .choice{justify-content:center;font-size:1.05rem;padding:12px}
+.dec .choice:has(input[value="Exclude"]:checked){border-color:var(--excl);background:var(--excl-soft)}
+.dec .choice:has(input[value="Unsure"]:checked){border-color:#8A4B08;background:#FBEBD6}
+label.field{display:block;font-weight:600;margin:0 0 4px}
+textarea{width:100%;padding:8px;border:1px solid var(--line);border-radius:6px;background:#fff;min-height:70px;resize:vertical}
+.missing{color:var(--danger);font-size:.88rem;margin:0 0 12px}
+.status{font-size:.85rem;color:var(--muted);min-height:1.4em}
+.hidden{display:none !important}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;padding-top:12px;border-top:1px solid var(--line)}
+.screen{max-width:640px;margin:48px auto;background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:28px}
+.screen h1{font-size:1.4rem;margin:0 0 12px}
+.screen input[type=text]{width:100%;padding:10px;border:1px solid var(--line);border-radius:6px;margin:6px 0 14px}
+kbd{border:1px solid var(--line);border-bottom-width:2px;border-radius:4px;padding:0 5px;font-size:.85em;background:#fff}
+</style>
+</head>
+<body>
+<a class="skip" href="#codage">Skip to form</a>
+<div id="app">Chargement…</div>
+
+<script src="content.js"></script>
+<script>
+/* ═════════ CONFIGURATION ═════════ */
+var CFG = {
+  PROJET: "screening_full_v1",
+  ENDPOINT: "https://script.google.com/macros/s/AKfycbz7hv4QjkYTcjkS7FQvo9urP8n9v36wiOOhH5isxAvPnyLi98tn4RcpZ9HQwN0mL0rU/exec",   // URL of the deployed Google Apps Script (leave empty to work offline only)
+  KEY: "screening2026"         // shared key, must match KEY in apps_script.gs
+};
+
+/* ═════════ EXCLUSION CRITERIA ═════════ */
+var CODES = [
+  ["E1a","Document type"],
+  ["E1b","Language"],
+  ["E2","Outside crop production"],
+  ["E3","Outside production: downstream"],
+  ["E4","Outside farm scale"],
+  ["E5","Practices as context only"],
+  ["E6a","Other focus: health, nutrition, food security"],
+  ["E6b","Other focus: programmes, policies, services"],
+  ["E6c","Other focus: perceptions"],
+  ["E6d","Other focus: other"],
+  ["E7a","Gender not mentioned"],
+  ["E7b","Gender mentioned but not integrated"]
+];
+var R_GENRE = /\b(gender(ed|s)?|sex|women|woman|females?|men|males?|girls?|boys?|wife|wives|husbands?|spouses?|spousal|widows?|feminis\w*|patriarch\w*|masculinit\w*|intra-?household|empower\w*|weai)\b/gi;
+var R_AGRO = /\b(agronom\w*|agroecolog\w*|agricultur\w*|farm(s|ing|er|ers|land|lands)?|crop(s|ping|land)?|cultivat\w*|cultivars?|variet(y|ies)|seeds?|seedlings?|yields?|soils?|fertili[sz]\w*|manure|compost\w*|mulch\w*|tillage|intercrop\w*|rotations?|irrigat\w*|pests?|pesticides?|herbicides?|weeds?|weeding|harvest\w*|sowing|planting|plots?|fields?|agroforest\w*|legumes?|maize|rice|wheat|sorghum|millets?|cassava|beans?|cowpeas?|groundnuts?|coffee|cocoa|vegetables?|livestock|fodder|forages?|grazing|pastures?|practices?)\b/gi;
+function count(re,t){return ((t||"").match(re)||[]).length;}
+function highlight(t){return esc(t).replace(R_GENRE,function(m){return '<mark class="g">'+m+'</mark>';});}
+
+/* ═════════ STATE ═════════ */
+var app=document.getElementById("app"), ART=window._CONTENT||[], CODER=null, store={}, LSKEY="", idx=0, showG=true, showA=true;
+function esc(s){return String(s||"").replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
+function setStatus(t){var s=document.getElementById("status");if(s)s.textContent=t;}
+function save(){try{localStorage.setItem(LSKEY,JSON.stringify({idx:idx,codes:store}));setStatus("Saved on this device");}catch(e){setStatus("Local storage unavailable: download the CSV regularly.");}}
+function complete(c){return !!(c&&c.decision&&(c.decision!=="Exclude"||c.code));}
+function nDone(){var n=0;ART.forEach(function(a){if(complete(store[a.id]))n++;});return n;}
+
+/* ═════════ ACCUEIL ═════════ */
+var REVIEWERS = ["CS", "TB"];   // predefined reviewers; "Other" lets someone type an identifier
+function landing(){
+  app.innerHTML='<section class="screen"><h1>Abstract screening</h1>'+
+  '<p>'+ART.length+' records. For each one: include, exclude (with the reason) or mark as unsure. Unsure records will be checked on the full text.</p>'+
+  '<p>Your decisions are saved automatically. Always choose the same reviewer to resume where you stopped.</p>'+
+  '<fieldset><legend>Who is screening?</legend><div class="choices dec">'+
+   REVIEWERS.concat(["Other"]).map(function(r){return '<label class="choice"><input type="radio" name="reviewer" value="'+r+'"><span class="t">'+r+'</span></label>';}).join("")+
+  '</div></fieldset>'+
+  '<div id="otherbox" class="hidden"><label class="field" for="otherId">Your identifier</label>'+
+  '<input type="text" id="otherId" autocomplete="off" maxlength="30" placeholder="e.g. initials">'+
+  '<p class="hint">Letters and numbers only (not case-sensitive). Write it down: you will need the same one next time.</p></div>'+
+  '<p class="missing hidden" id="nomiss" role="alert"></p>'+
+  '<button class="btn btn-primary" id="go">Start</button>'+
+  '<p class="hint" style="margin-top:16px">Shortcuts: <kbd>Alt</kbd>+<kbd>I</kbd> include, <kbd>Alt</kbd>+<kbd>E</kbd> exclude, <kbd>Alt</kbd>+<kbd>U</kbd> unsure, <kbd>Alt</kbd>+<kbd>→</kbd> / <kbd>←</kbd> next or previous record.</p></section>';
+  var box=document.getElementById("otherbox"), inp=document.getElementById("otherId"), miss=document.getElementById("nomiss");
+  [].forEach.call(document.querySelectorAll('input[name="reviewer"]'),function(r){r.onchange=function(){box.classList.toggle("hidden",this.value!=="Other");miss.classList.add("hidden");if(this.value==="Other")inp.focus();};});
+  function fail(t,el){miss.textContent=t;miss.classList.remove("hidden");if(el){el.setAttribute("aria-invalid","true");el.focus();}}
+  function go(){
+    var r=document.querySelector('input[name="reviewer"]:checked');
+    if(!r)return fail("Please select your reviewer identifier.");
+    var v=r.value;
+    if(v==="Other"){
+      v=inp.value.trim().replace(/\s+/g,"_").toLowerCase();
+      if(!v)return fail("Please type your identifier.",inp);
+      if(!/^[A-Za-z0-9_-]+$/.test(v))return fail("Use letters, numbers, - or _ only.",inp);
+      if(REVIEWERS.map(function(x){return x.toLowerCase();}).indexOf(v.toLowerCase())>-1)return fail("This identifier is already listed above: please select it directly.",inp);
+    }
+    CODER=v; start();
+  }
+  document.getElementById("go").onclick=go;
+  inp.addEventListener("keydown",function(e){if(e.key==="Enter")go();});
+  inp.addEventListener("input",function(){miss.classList.add("hidden");inp.removeAttribute("aria-invalid");});
+}
+function start(){
+  if(!ART.length){app.innerHTML='<section class="screen"><h1>Data not loaded</h1><p>The content.js file could not be found.</p></section>';return;}
+  if(!CODER){landing();return;}
+  LSKEY="scr_"+CFG.PROJET+"_"+CODER;
+  try{var raw=JSON.parse(localStorage.getItem(LSKEY)||"{}");store=raw.codes||{};idx=raw.idx||0;}catch(e){store={};}
+  if(!CFG.ENDPOINT){render();return;}
+  app.innerHTML='<section class="screen"><h1>Loading your previous decisions…</h1></section>';
+  var done=false, t=setTimeout(function(){if(!done){done=true;render();setStatus("Shared spreadsheet not reachable: working on this device only.");}},10000);
+  fetch(CFG.ENDPOINT+"?key="+encodeURIComponent(CFG.KEY)+"&project="+encodeURIComponent(CFG.PROJET)+"&reviewer="+encodeURIComponent(CODER))
+   .then(function(r){return r.json();})
+   .then(function(d){if(done)return;done=true;clearTimeout(t);merge((d&&d.codes)||{});save();render();flush();})
+   .catch(function(){if(done)return;done=true;clearTimeout(t);render();setStatus("Shared spreadsheet not reachable: working on this device only.");});
+}
+/* Merge remote or restored decisions: the most recent version of each record wins */
+function merge(other){
+  Object.keys(other).forEach(function(id){
+    var o=other[id], l=store[id];
+    if(!l||!l.modifie||(o.modifie&&o.modifie>l.modifie)) store[id]=o;
+  });
+  if(CFG.ENDPOINT){Object.keys(store).forEach(function(id){var l=store[id],o=other[id];if(complete(l)&&(!o||!o.modifie||l.modifie>o.modifie))queue(id);});}
+}
+/* ═════════ AUTOMATIC SYNC (one record at a time) ═════════ */
+function pending(){try{return JSON.parse(localStorage.getItem(LSKEY+"_pending")||"[]");}catch(e){return [];}}
+function setPending(p){try{localStorage.setItem(LSKEY+"_pending",JSON.stringify(p));}catch(e){}}
+function queue(id){if(!CFG.ENDPOINT)return;var p=pending();if(p.indexOf(id)<0){p.push(id);setPending(p);}clearTimeout(window._ft);window._ft=setTimeout(flush,1200);}
+var flushing=false;
+function flush(){
+  if(!CFG.ENDPOINT||flushing)return; var p=pending(); if(!p.length){setStatus("Saved and synced");return;}
+  if(!navigator.onLine){setStatus("Offline: saved on this device, will sync later ("+p.length+" pending)");return;}
+  flushing=true; var id=p[0], a=ART.filter(function(x){return x.id===id;})[0]||{}, c=store[id]||{};
+  fetch(CFG.ENDPOINT,{method:"POST",redirect:"follow",headers:{"Content-Type":"text/plain;charset=utf-8"},
+    body:JSON.stringify({type:"record",key:CFG.KEY,project:CFG.PROJET,reviewer:CODER,id:id,year:a.year||"",authors:a.authors||"",title:a.title||"",decision:c.decision||"",code:c.code||"",modified:c.modifie||""})})
+  .then(function(r){return r.text();})
+  .then(function(t){flushing=false;if(t.indexOf("OK")===0){var q=pending().filter(function(x){return x!==id;});setPending(q);flush();}else{setStatus("Sync error: "+t);}})
+  .catch(function(){flushing=false;setStatus("Saved on this device; sync will retry ("+pending().length+" pending)");});
+}
+window.addEventListener("online",flush);
+/* ═════════ RENDERING ═════════ */
+function render(){
+  if(idx<0)idx=0; if(idx>=ART.length)idx=ART.length-1;
+  var a=ART[idx], c=store[a.id]||{}, done=nDone(), meta=[a.year,a.journal].filter(Boolean).join(", ");
+  app.innerHTML=
+  '<header><h1>Screening</h1>'+
+   '<div class="progress"><div class="progress-label" id="plabel">'+done+' of '+ART.length+' records screened</div>'+
+   '<div class="bar" role="progressbar" aria-labelledby="plabel" aria-valuemin="0" aria-valuemax="'+ART.length+'" aria-valuenow="'+done+'"><span style="width:'+Math.round(100*done/ART.length)+'%"></span></div></div>'+
+   '<span class="coder">Reviewer: '+esc(CODER)+'</span>'+
+   '<div class="nav"><button class="btn" id="prev"'+(idx===0?" disabled":"")+'>Previous</button>'+
+    '<label class="sr" for="jump">Go to record</label><select id="jump">'+ART.map(function(x,i){return '<option value="'+i+'"'+(i===idx?" selected":"")+'>'+x.id+(complete(store[x.id])?" ✓":"")+'</option>';}).join("")+'</select>'+
+    '<button class="btn" id="next"'+(idx===ART.length-1?" disabled":"")+'>Next</button>'+
+    '<button class="btn" id="todo">Next unscreened</button>'+
+    '<button class="btn btn-primary" id="finish">Send and save</button></div></header>'+
+  '<main>'+
+   '<article class="article" aria-labelledby="atitle">'+
+    '<p class="meta">'+esc(a.id)+(meta?' – '+esc(meta):'')+'</p>'+
+    '<h2 id="atitle" tabindex="-1">'+highlight(a.title)+'</h2>'+
+    '<p class="authors">'+esc(a.authors)+'</p>'+
+    '<div class="abstract'+(showG?'':' no-g')+'" id="abs">'+(a.abstract?highlight(a.abstract):'<span class="empty">No abstract available for this record.</span>')+'</div>'+
+    '<div class="tools"><label><input type="checkbox" id="hlg"'+(showG?" checked":"")+'> Highlight gender-related terms</label>'+
+     (a.doi?'<a href="https://doi.org/'+esc(a.doi)+'" target="_blank" rel="noopener">Open article (DOI)</a>':'')+'</div>'+
+   '</article>'+
+   '<form id="codage" aria-labelledby="ftitle" novalidate>'+
+    '<h2 id="ftitle" style="font-size:1.1rem;margin:0 0 14px">Decision for '+esc(a.id)+'</h2>'+
+    '<p class="missing hidden" id="missing" role="alert" tabindex="-1"></p>'+
+    '<fieldset><legend>Decision</legend><div class="choices dec">'+
+     [['Include','Include'],['Exclude','Exclude'],['Unsure','Unsure']].map(function(v){return '<label class="choice"><input type="radio" name="decision" value="'+v[0]+'"'+(c.decision===v[0]?" checked":"")+'><span class="t">'+v[1]+'</span></label>';}).join("")+
+    '</div></fieldset>'+
+    '<fieldset id="fs-code" class="'+(c.decision==="Exclude"?"":"hidden")+'"><legend>Exclusion reason</legend><p class="hint">Select the first applicable reason, in list order.</p><div class="choices">'+
+     CODES.map(function(o){return '<label class="choice"><input type="radio" name="code" value="'+o[0]+'"'+(c.code===o[0]?" checked":"")+'><span class="t">'+o[0]+' – '+esc(o[1])+'</span></label>';}).join("")+
+    '</div></fieldset>'+
+    '<div class="actions"><button type="button" class="btn btn-primary" id="savenext">Confirm and go to next</button></div>'+
+    '<p class="status" id="status" aria-live="polite"></p>'+
+   '</form></main>';
+  bind();
+}
+
+/* ═════════ INTERACTIONS ═════════ */
+function readForm(){
+  var f=document.getElementById("codage"); if(!f)return;
+  var a=ART[idx], g=function(n){var e=f.querySelector('input[name="'+n+'"]:checked');return e?e.value:"";};
+  var prev=store[a.id]||{}, c={decision:g("decision"),code:g("code")};
+  if(c.decision!=="Exclude")c.code="";
+  if(c.decision===(prev.decision||"")&&c.code===(prev.code||""))return;
+  c.modifie=new Date().toISOString();
+  store[a.id]=c; save(); updateProgress(); if(complete(c))queue(a.id);
+}
+function updateProgress(){var d=nDone(),b=document.querySelector(".bar");if(!b)return;b.setAttribute("aria-valuenow",d);b.firstChild.style.width=Math.round(100*d/ART.length)+"%";document.getElementById("plabel").textContent=d+" of "+ART.length+" records screened";}
+function go(i){readForm();idx=i;save();render();document.getElementById("atitle").focus();}
+function nextTodo(){for(var k=1;k<=ART.length;k++){var j=(idx+k)%ART.length;if(!complete(store[ART[j].id])){go(j);return;}}setStatus("All records have been screened.");}
+function setDecision(v){var r=document.querySelector('input[name="decision"][value="'+v+'"]');if(r){r.checked=true;r.dispatchEvent(new Event("change",{bubbles:true}));r.focus();}}
+function bind(){
+  var f=document.getElementById("codage");
+  f.addEventListener("change",function(e){
+    if(e.target.name==="decision")document.getElementById("fs-code").classList.toggle("hidden",e.target.value!=="Exclude");
+    document.getElementById("missing").classList.add("hidden"); readForm();
+  });
+  document.getElementById("prev").onclick=function(){go(idx-1);};
+  document.getElementById("next").onclick=function(){go(idx+1);};
+  document.getElementById("jump").onchange=function(){go(+this.value);};
+  document.getElementById("todo").onclick=nextTodo;
+  document.getElementById("finish").onclick=function(){readForm();finishScreen();};
+  document.getElementById("hlg").onchange=function(){showG=this.checked;document.getElementById("abs").classList.toggle("no-g",!showG);};
+  document.getElementById("savenext").onclick=function(){
+    readForm(); var c=store[ART[idx].id]||{}, m=document.getElementById("missing"), msg="";
+    if(!c.decision)msg="Choose Include, Exclude or Unsure."; else if(c.decision==="Exclude"&&!c.code)msg="Select an exclusion reason.";
+    if(msg){m.textContent=msg;m.classList.remove("hidden");m.focus();return;}
+    if(idx<ART.length-1)go(idx+1); else finishScreen();
+  };
+  if(CFG.ENDPOINT&&pending().length)setStatus("Saved on this device; "+pending().length+" decision(s) waiting to sync");
+}
+document.addEventListener("keydown",function(e){
+  if(!document.getElementById("codage")||!e.altKey)return;
+  var k=e.key.toLowerCase();
+  if(e.key==="ArrowRight"&&idx<ART.length-1){e.preventDefault();go(idx+1);}
+  else if(e.key==="ArrowLeft"&&idx>0){e.preventDefault();go(idx-1);}
+  else if(k==="i"){e.preventDefault();setDecision("Include");}
+  else if(k==="e"){e.preventDefault();setDecision("Exclude");}
+  else if(k==="u"){e.preventDefault();setDecision("Unsure");}
+});
+
+/* ═════════ EXPORT ═════════ */
+function rows(){
+  var out=[["reviewer","id","year","authors","title","decision","exclusion_code","modified"]];
+  ART.forEach(function(a){var c=store[a.id]||{};out.push([CODER,a.id,a.year,a.authors,a.title,c.decision||"",c.code||"",c.modifie||""]);});
+  return out;
+}
+function csv(){return "\ufeff"+rows().map(function(r){return r.map(function(v){v=String(v).replace(/"/g,'""');return /[";\n]/.test(v)?'"'+v+'"':v;}).join(";");}).join("\n");}
+function download(n,t,type){var b=new Blob([t],{type:type}),l=document.createElement("a");l.href=URL.createObjectURL(b);l.download=n;document.body.appendChild(l);l.click();l.remove();}
+
+function finishScreen(){
+  app.innerHTML='<section class="screen"><h1>Send screening results</h1><p>'+nDone()+' of '+ART.length+' records screened. You can send partial results; the latest version is kept.</p>'+
+  '<p id="sendmsg" role="status"></p><div class="nav" style="margin:16px 0">'+
+  '<button class="btn btn-primary" id="send"'+(CFG.ENDPOINT?'':' disabled')+'>Send to shared spreadsheet</button>'+
+  '<button class="btn" id="dlcsv">Download CSV</button><button class="btn" id="dljson">Download backup</button>'+
+  '<label class="btn" for="restore" style="display:inline-flex;align-items:center">Restore from backup</label><input type="file" id="restore" accept=".json" class="sr">'+
+  '<button class="btn" id="back">Back to screening</button></div>'+
+  (CFG.ENDPOINT?'':'<p class="hint">Online sending is not configured: please download the CSV.</p>')+'</section>';
+  document.getElementById("back").onclick=render;
+  document.getElementById("dlcsv").onclick=function(){download("screening_"+CODER+".csv",csv(),"text/csv;charset=utf-8");};
+  document.getElementById("dljson").onclick=function(){download("backup_"+CODER+"_"+new Date().toISOString().slice(0,10)+".json",JSON.stringify({project:CFG.PROJET,reviewer:CODER,codes:store},null,1),"application/json");};
+  document.getElementById("restore").onchange=function(){var f=this.files[0];if(!f)return;var rd=new FileReader();rd.onload=function(){try{var d=JSON.parse(rd.result);if(d.reviewer&&d.reviewer!==CODER&&!confirm("This backup belongs to reviewer "+d.reviewer+". Restore it under "+CODER+"?"))return;merge(d.codes||{});save();document.getElementById("sendmsg").textContent="Backup restored: "+nDone()+" records screened.";}catch(e){document.getElementById("sendmsg").textContent="This file is not a valid backup.";}};rd.readAsText(f);};
+  var s=document.getElementById("send"); if(s)s.onclick=send;
+}
+function send(){
+  var msg=document.getElementById("sendmsg"); msg.textContent="Sending…";
+  fetch(CFG.ENDPOINT,{method:"POST",redirect:"follow",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({projet:CFG.PROJET,coder:CODER,envoi:new Date().toISOString(),rows:rows()})})
+  .then(function(r){return r.text();}).then(function(t){msg.textContent=t.indexOf("OK")===0?"Sent.":"Unexpected response: "+t;})
+  .catch(function(e){msg.textContent="Sending failed ("+e.message+"). Please download the CSV as a backup.";});
+}
+start();
+</script>
+</body>
+</html>
